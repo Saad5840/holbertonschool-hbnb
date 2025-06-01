@@ -39,30 +39,47 @@ It simplifies the interaction by exposing a unified interface (e.g., `HBnBServic
 
 ```mermaid
 classDiagram
-    class PresentationLayer {
+    %% Presentation Layer
+    class APIController {
         <<Interface>>
-        +APIService
-        +UserController
-        +PlaceController
-        +ReviewController
-        +AmenityController
+        +create_user()
+        +get_place()
+        +post_review()
     }
 
-    class BusinessLogicLayer {
-        +HBnBFacade
-        +User
-        +Place
-        +Review
-        +Amenity
+    %% Business Logic Layer
+    class HBNBFacade {
+        +register_user()
+        +create_place()
+        +submit_review()
     }
 
-    class PersistenceLayer {
-        +UserRepository
-        +PlaceRepository
-        +ReviewRepository
-        +AmenityRepository
-        +DatabaseConnector
-    }
+    class User
+    class Place
+    class Review
+    class Amenity
 
-    PresentationLayer --> BusinessLogicLayer : Facade Interface
-    BusinessLogicLayer --> PersistenceLayer : Data Access
+    %% Persistence Layer
+    class UserRepository
+    class PlaceRepository
+    class ReviewRepository
+    class AmenityRepository
+    class DBConnector
+
+    %% Relationships
+    APIController --> HBNBFacade : uses (Facade Pattern)
+    HBNBFacade --> User : manages
+    HBNBFacade --> Place : manages
+    HBNBFacade --> Review : manages
+    HBNBFacade --> Amenity : manages
+
+    User --> UserRepository : saves/loads via
+    Place --> PlaceRepository
+    Review --> ReviewRepository
+    Amenity --> AmenityRepository
+
+    UserRepository --> DBConnector
+    PlaceRepository --> DBConnector
+    ReviewRepository --> DBConnector
+    AmenityRepository --> DBConnector
+
