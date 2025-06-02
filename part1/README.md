@@ -1,6 +1,6 @@
 # HBnB Architecture Documentation
 
-**Author:** Ahmed
+**Author:** Ahmed Dawwari, Saad Alarifi and Haidar Alessa
 
 ---
 
