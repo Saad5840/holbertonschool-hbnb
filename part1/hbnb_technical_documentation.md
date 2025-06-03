@@ -1,6 +1,6 @@
 # HBnB Technical Documentation
 
-**Author:** Ahmed  
+**Author:** Ahmed Dawwari, Saad Alarifi and Haidar Alessa  
 **Project:** HBnB - Holberton BnB Application  
 **Date:** 2025-06-02  
 **Purpose:** This document serves as a comprehensive blueprint for the HBnB project. It gathers all architectural and design diagrams alongside explanatory notes to guide implementation and provide a clear reference for the system's structure and behavior.
