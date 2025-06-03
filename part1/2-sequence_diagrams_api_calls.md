@@ -1,6 +1,6 @@
 # API Sequence Diagrams
 
-**Author:** Ahmed  
+**Author:** Ahmed Dawwari, Saad Alarifi and Haidar Alessa
 **Project:** HBnB - Part 1  
 **Task:** Sequence Diagrams for API Calls
 
