@@ -1,14 +1,9 @@
 ```mermaid
-classDiagram
-    class BaseModel {
-        +UUID4 id
+classDigram
+    class User {
+  		+UUID4 id
         +datetime created_at
         +datetime updated_at
-        +save() void
-        +to_dict() dict
-    }
-
-    class User {
         +string email
         +string password
         +string first_name
@@ -16,22 +11,31 @@ classDiagram
     }
 
     class Place {
+		+UUID4 id
+        +datetime created_at
+        +datetime updated_at
         +string name
         +string description
         +float latitude
         +float longitude
         +int number_rooms
         +User owner
-        +List~Amenity~ amenities
     }
 
     class Review {
+		+UUID4 id
+        +datetime created_at
+        +datetime updated_at
         +string text
         +User reviewer
         +Place place
     }
 
     class Amenity {
+  		+UUID4 id
+		+Place place
+        +datetime created_at
+        +datetime updated_at
         +string name
     }
 
