@@ -1,5 +1,5 @@
 ```mermaid
-classDigram
+classDiagram
     class User {
   		+UUID4 id
         +datetime created_at
