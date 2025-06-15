@@ -8,6 +8,11 @@ classDiagram
         +string password
         +string first_name
         +string last_name
+		+register()
+		+update_profile()
+		+delete()
+		+login()
+		
     }
 
     class Place {
@@ -20,6 +25,10 @@ classDiagram
         +float longitude
         +int number_rooms
         +User owner
+		+create()
+		+update()
+		+delete()
+		+list()
     }
 
     class Review {
@@ -29,6 +38,10 @@ classDiagram
         +string text
         +User reviewer
         +Place place
+		+create()
+        +update()
+        +delete()
+        +list()
     }
 
     class Amenity {
@@ -37,6 +50,10 @@ classDiagram
         +datetime created_at
         +datetime updated_at
         +string name
+		+create()
+        +update()
+        +delete()
+        +list()
     }
 
 
