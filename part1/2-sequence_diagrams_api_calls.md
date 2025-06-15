@@ -52,9 +52,9 @@ sequenceDiagram
     participant PlaceModel
     participant DB
 
-    Client->>API: GET /places?city_id=xyz
-    API->>PlaceModel: fetch_by_city(city_id)
-    PlaceModel->>DB: query_places(city_id)
+    Client->>API: GET /places
+    API->>PlaceModel: fetch
+    PlaceModel->>DB: query_places
     DB-->>PlaceModel: list_of_places
     PlaceModel-->>API: serialize list
     API-->>Client: 200 OK + JSON response
