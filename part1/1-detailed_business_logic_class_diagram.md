@@ -1,4 +1,4 @@
-classDiagram
+@startuml
 class BaseModel {
     +UUID4 id
     +datetime created_at
@@ -43,4 +43,5 @@ Place --> User : "1 owner"
 Review --> User : "1 reviewer"
 Review --> Place : "1 place"
 Place --> "0..*" Amenity : "has"
+@enduml
 
