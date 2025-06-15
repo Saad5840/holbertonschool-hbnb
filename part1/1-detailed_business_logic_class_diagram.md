@@ -39,10 +39,6 @@ classDiagram
         +string name
     }
 
-    User --|> BaseModel
-    Place --|> BaseModel
-    Review --|> BaseModel
-    Amenity --|> BaseModel
 
     Place --> User : "1 owner"
     Review --> User : "1 reviewer"
