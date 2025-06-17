@@ -1,80 +1,82 @@
-from flask_restx import Namespace, Resource, fields
 from flask import request
+from flask_restx import Namespace, Resource, fields
 from app.services import facade
 
 api = Namespace('places', description='Place operations')
 
-amenity_model = api.model('PlaceAmenity', {
-    'id': fields.String,
-    'name': fields.String
-})
-
+# Nested models
 user_model = api.model('PlaceUser', {
-    'id': fields.String,
-    'first_name': fields.String,
-    'last_name': fields.String,
-    'email': fields.String
+    'id': fields.String(),
+    'name': fields.String()
 })
 
+amenity_model = api.model('PlaceAmenity', {
+    'id': fields.String(),
+    'name': fields.String()
+})
+
+review_model = api.model('PlaceReview', {
+    'id': fields.String(),
+    'text': fields.String(),
+    'rating': fields.Integer(),
+    'user_id': fields.String()
+})
+
+# Full Place model
 place_model = api.model('Place', {
     'title': fields.String(required=True),
-    'description': fields.String,
+    'description': fields.String(),
     'price': fields.Float(required=True),
     'latitude': fields.Float(required=True),
     'longitude': fields.Float(required=True),
     'owner_id': fields.String(required=True),
-    'amenities': fields.List(fields.String, required=True)
+    'owner': fields.Nested(user_model),
+    'amenities': fields.List(fields.Nested(amenity_model)),
+    'reviews': fields.List(fields.Nested(review_model))
 })
 
 @api.route('/')
 class PlaceList(Resource):
     @api.expect(place_model)
-    @api.response(201, 'Place successfully created')
-    @api.response(400, 'Invalid input data')
+    @api.response(201, 'Place created')
+    @api.response(400, 'Invalid input')
     def post(self):
-        """Register a new place"""
-        data = request.json
         try:
-            place = facade.create_place(data)
-            return {
-                "id": place.id,
-                "title": place.title,
-                "description": place.description,
-                "price": place.price,
-                "latitude": place.latitude,
-                "longitude": place.longitude,
-                "owner_id": place.owner_id
-            }, 201
+            place = facade.create_place(request.json)
+            return place, 201
         except ValueError as e:
-            return {'message': str(e)}, 400
+            return {'error': str(e)}, 400
 
-    @api.response(200, 'List of places retrieved successfully')
+    @api.response(200, 'All places retrieved')
     def get(self):
-        """Retrieve a list of all places"""
         return facade.get_all_places(), 200
 
-@api.route('/<place_id>')
+@api.route('/<string:place_id>')
 class PlaceResource(Resource):
-    @api.response(200, 'Place details retrieved successfully')
+    @api.response(200, 'Place retrieved')
     @api.response(404, 'Place not found')
     def get(self, place_id):
-        """Get place details by ID"""
-        place = facade.get_place(place_id)
-        if place:
-            return place, 200
-        return {'message': 'Place not found'}, 404
+        try:
+            return facade.get_place(place_id), 200
+        except ValueError:
+            return {'error': 'Place not found'}, 404
 
     @api.expect(place_model)
-    @api.response(200, 'Place updated successfully')
+    @api.response(200, 'Place updated')
+    @api.response(400, 'Invalid input')
     @api.response(404, 'Place not found')
-    @api.response(400, 'Invalid input data')
     def put(self, place_id):
-        """Update a place's information"""
-        data = request.json
         try:
-            updated = facade.update_place(place_id, data)
-            if not updated:
-                return {'message': 'Place not found'}, 404
-            return {'message': 'Place updated successfully'}, 200
+            return facade.update_place(place_id, request.json), 200
         except ValueError as e:
-            return {'message': str(e)}, 400
+            if 'not found' in str(e).lower():
+                return {'error': str(e)}, 404
+            return {'error': str(e)}, 400
+
+    @api.response(200, 'Place deleted')
+    @api.response(404, 'Place not found')
+    def delete(self, place_id):
+        try:
+            return facade.delete_place(place_id), 200
+        except ValueError:
+            return {'error': 'Place not found'}, 404
