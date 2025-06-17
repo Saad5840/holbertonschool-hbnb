@@ -1,10 +1,10 @@
 from flask import Flask
 from flask_restx import Api
 
-from api.user_routes import user_ns
-from api.place_routes import place_ns
-from api.amenity_routes import amenity_ns
-from api.review_routes import review_ns
+from app.api.v1.users import user_ns
+from app.api.v1.places import place_ns
+from app.api.v1.amenities import amenity_ns
+from app.api.v1.reviews import review_ns
 
 api = Api(
     title="HBnB RESTful API",
