@@ -1,13 +1,11 @@
 ```mermaid
 classDiagram
     class User {
-  		+UUID4 id
-        +datetime created_at
-        +datetime updated_at
         +string email
         +string password
         +string first_name
         +string last_name
+		+bool is_admin
 		+register()
 		+update_profile()
 		+delete()
@@ -16,13 +14,11 @@ classDiagram
     }
 
     class Place {
-		+UUID4 id
-        +datetime created_at
-        +datetime updated_at
         +string name
         +string description
         +float latitude
         +float longitude
+		+float price
         +int number_rooms
         +User owner
 		+create()
@@ -32,9 +28,7 @@ classDiagram
     }
 
     class Review {
-		+UUID4 id
-        +datetime created_at
-        +datetime updated_at
+		+int rating
         +string text
         +User reviewer
         +Place place
@@ -45,16 +39,27 @@ classDiagram
     }
 
     class Amenity {
-  		+UUID4 id
-		+Place place
-        +datetime created_at
-        +datetime updated_at
         +string name
 		+create()
         +update()
         +delete()
         +list()
     }
+
+	class BaseModel {
+    +UUID4 id
+    +datetime created_atAdd commentMore actions
+    +datetime updated_at
+    +save() void
+    +to_dict() dict
+
+	}
+
+	More actions
+	User --|> BaseModel
+	Place --|> BaseModel
+	Review --|> BaseModel
+	Amenity --|> BaseModel
 
 
     Place --> User : "1 owner"
