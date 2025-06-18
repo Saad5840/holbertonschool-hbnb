@@ -1,48 +1,48 @@
 from flask_restx import Namespace, Resource, fields
 from flask import request
-from app.services import facade
+from app.services.facade import HBnBFacade
 
-review_ns = Namespace('reviews', description='Review operations')
+review_ns = Namespace('reviews', description='Review related operations')
+facade = HBnBFacade()
 
 review_model = review_ns.model('Review', {
-    'text': fields.String(required=True),
-    'rating': fields.Integer(required=True),
-    'user_id': fields.String(required=True),
-    'place_id': fields.String(required=True)
+    'id': fields.String(readOnly=True),
+    'text': fields.String(required=True, description="Review content"),
+    'rating': fields.Integer(required=True, min=1, max=5, description="Rating from 1 to 5"),
+    'user_id': fields.String(required=True, description="ID of the reviewer"),
+    'place_id': fields.String(required=True, description="ID of the reviewed place"),
 })
 
 @review_ns.route('/')
 class ReviewList(Resource):
-    @review_ns.expect(review_model)
-    @review_ns.response(201, 'Review created')
-    @review_ns.response(400, 'Invalid input')
-    def post(self):
-        try:
-            review = facade.create_review(request.json)
-            return review, 201
-        except ValueError as e:
-            return {"error": str(e)}, 400
-
-    @review_ns.response(200, 'All reviews retrieved')
+    @review_ns.marshal_list_with(review_model)
     def get(self):
-        return facade.get_all_reviews(), 200
+        """List all reviews"""
+        return facade.get_all_reviews()
 
-@review_ns.route('/<string:review_id>')
-class ReviewResource(Resource):
-    @review_ns.response(200, 'Review retrieved')
-    @review_ns.response(404, 'Not found')
-    def get(self, review_id):
-        try:
-            return facade.get_review(review_id), 200
-        except ValueError:
-            return {"error": "Review not found"}, 404
+    @review_ns.expect(review_model, validate=True)
+    @review_ns.marshal_with(review_model, code=201)
+    def post(self):
+        """Create a new review"""
+        data = review_ns.payload
+        return facade.create_review(data), 201
 
-@review_ns.route('/places/<string:place_id>/reviews')
-class PlaceReviewList(Resource):
-    @review_ns.response(200, 'Reviews for place retrieved')
-    @review_ns.response(404, 'Place not found')
-    def get(self, place_id):
-        try:
-            return facade.get_reviews_by_place(place_id), 200
-        except ValueError:
-            return {"error": "Place not found"}, 404
+@review_ns.route('/<string:id>')
+@review_ns.param('id', 'The Review identifier')
+class Review(Resource):
+    @review_ns.marshal_with(review_model)
+    def get(self, id):
+        """Get a review by ID"""
+        return facade.get_review(id)
+
+    @review_ns.expect(review_model, validate=True)
+    @review_ns.marshal_with(review_model)
+    def put(self, id):
+        """Update a review by ID"""
+        data = review_ns.payload
+        return facade.update_review(id, data), 200
+
+    def delete(self, id):
+        """Delete a review by ID"""
+        facade.delete_review(id)
+        return {'message': f'Review {id} deleted successfully'}, 204

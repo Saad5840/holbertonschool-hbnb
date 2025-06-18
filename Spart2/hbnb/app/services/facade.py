@@ -16,7 +16,7 @@ class HBnBFacade:
                 raise ValueError(f"Missing field: {field}")
 
         user = User(**user_data)
-        in_memory_repo.save('users', user)
+        in_memory_repo.add('users', user)
         return user.to_dict()
 
     def get_user(self, user_id):
@@ -26,7 +26,8 @@ class HBnBFacade:
         return user.to_dict()
 
     def get_all_users(self):
-        return [u.to_dict() for u in in_memory_repo.get_all('users')]
+        users = in_memory_repo.get_all('users')
+        return [u.to_dict() for u in users]
 
     # -------------------- AMENITIES --------------------
 
@@ -35,7 +36,7 @@ class HBnBFacade:
             raise ValueError("Missing amenity name")
 
         amenity = Amenity(**amenity_data)
-        in_memory_repo.save('amenities', amenity)
+        in_memory_repo.add('amenities', amenity)
         return amenity.to_dict()
 
     def get_amenity(self, amenity_id):
@@ -45,7 +46,8 @@ class HBnBFacade:
         return amenity.to_dict()
 
     def get_all_amenities(self):
-        return [a.to_dict() for a in in_memory_repo.get_all('amenities')]
+        amenities = in_memory_repo.get_all('amenities')
+        return [a.to_dict() for a in amenities]
 
     # -------------------- PLACES --------------------
 
@@ -66,7 +68,6 @@ class HBnBFacade:
         if not owner:
             raise ValueError("Owner not found")
 
-        # Handle optional amenities
         amenities = []
         if 'amenity_ids' in place_data:
             for amenity_id in place_data['amenity_ids']:
@@ -76,7 +77,7 @@ class HBnBFacade:
 
         place = Place(**place_data)
         place.amenity_ids = amenities
-        in_memory_repo.save('places', place)
+        in_memory_repo.add('places', place)
         return self._enrich_place(place)
 
     def get_place(self, place_id):
@@ -86,7 +87,8 @@ class HBnBFacade:
         return self._enrich_place(place)
 
     def get_all_places(self):
-        return [self._enrich_place(p) for p in in_memory_repo.get_all('places')]
+        places = in_memory_repo.get_all('places')
+        return [self._enrich_place(p) for p in places]
 
     def update_place(self, place_id, data):
         place = in_memory_repo.get_by_id('places', place_id)
@@ -164,7 +166,7 @@ class HBnBFacade:
             raise ValueError("Place not found")
 
         review = Review(**review_data)
-        in_memory_repo.save('reviews', review)
+        in_memory_repo.add('reviews', review)
         return review.to_dict()
 
     def get_review(self, review_id):
@@ -174,12 +176,14 @@ class HBnBFacade:
         return review.to_dict()
 
     def get_all_reviews(self):
-        return [r.to_dict() for r in in_memory_repo.get_all('reviews')]
+        reviews = in_memory_repo.get_all('reviews')
+        return [r.to_dict() for r in reviews]
 
     def get_reviews_by_place(self, place_id):
         if not in_memory_repo.get_by_id('places', place_id):
             raise ValueError("Place not found")
-        return [r.to_dict() for r in in_memory_repo.get_all('reviews') if r.place_id == place_id]
+        reviews = in_memory_repo.get_all('reviews')
+        return [r.to_dict() for r in reviews if r.place_id == place_id]
 
     def update_review(self, review_id, data):
         review = in_memory_repo.get_by_id('reviews', review_id)
