@@ -10,7 +10,7 @@ class HBnBFacade:
     # -------------------- USERS --------------------
 
     def create_user(self, user_data):
-        required = ['name', 'email']
+        required = ['name', 'email', 'password']
         for field in required:
             if field not in user_data:
                 raise ValueError(f"Missing field: {field}")
