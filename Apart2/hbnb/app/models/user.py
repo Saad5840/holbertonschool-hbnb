@@ -1,31 +1,35 @@
-import re
-from .base_model import BaseModel
+from app.models.base_model import BaseModel
+from app.extensions import bcrypt
 
 class User(BaseModel):
-    def __init__(self, first_name, last_name, email, is_admin=False):
-        super().__init__()
-        if len(first_name) > 50 or len(last_name) > 50:
-            raise ValueError("First and last names must be <= 50 characters")
+    """Represents a user in the system with secure password handling."""
 
-        if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
-            raise ValueError("Invalid email format")
+    def __init__(self, name=None, email=None, password=None, is_admin=False, **kwargs):
+        super().__init__(**kwargs)
 
-        self.first_name = first_name
-        self.last_name = last_name
+        if not name or len(name) > 100:
+            raise ValueError("Name is required and must be <= 100 characters.")
+        if not email or "@" not in email:
+            raise ValueError("A valid email is required.")
+        if not password:
+            raise ValueError("Password is required.")
+
+        self.name = name
         self.email = email
-        self.password = None  # To be set separately
         self.is_admin = is_admin
+        self.hash_password(password)
 
-    def register(self, password):
-        self.password = password
+    def hash_password(self, password):
+        """Hashes the password and stores it internally."""
+        self.password = bcrypt.generate_password_hash(password).decode('utf-8')
 
-    def login(self, email, password):
-        return self.email == email and self.password == password
+    def verify_password(self, password):
+        """Verifies a given password against the stored hash."""
+        return bcrypt.check_password_hash(self.password, password)
 
-    def update_profile(self, data):
-        self.update(data)
-
-    def delete(self):
-        # logic for deletion (in-memory or database)
-        pass
-
+    def to_dict(self):
+        """Override to_dict to exclude the password."""
+        data = super().to_dict()
+        if 'password' in data:
+            del data['password']
+        return data
