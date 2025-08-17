@@ -1,9 +1,9 @@
 from app.extensions import db
 from domain.user import User
-from infrastructure.models.user import SQLAlchemyUser
+from infrastructure.models.user import User
 from infrastructure.repositories.sqlalchemy_repository import SQLAlchemyRepository
 
-user_repo = SQLAlchemyRepository(SQLAlchemyUser)
+user_repo = SQLAlchemyRepository(User)
 
 def create_user(data):
     user = User(

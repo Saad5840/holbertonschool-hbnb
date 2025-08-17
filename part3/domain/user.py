@@ -1,7 +1,7 @@
 from app.extensions import bcrypt
 from domain.base_model import BaseModel
 from sqlalchemy import Column, String, Boolean
-from infrastructure.models.user import SQLAlchemyUser
+from infrastructure.models.user import User
 
 class User(BaseModel):
     __tablename__ = 'users'
