@@ -4,21 +4,43 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css"/>
 </head>
 <body>
+    <header>
+        <nav>
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo" />
+            </a>
+            <a href="{{ url_for('login') }}" class="login-button">
+                <i class="ph-bold ph-identification-badge"></i>
+                <span>Login</span>
+            </a>
+        </nav> 
+    </header>
     <main>
-        <form id="login-form">
-            <h2>Login</h2>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-            
-            <button type="submit">Login</button>
+        <form id="login-form" class="login-form">
+            <div class="login-form-row">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="email@example.com" required>
+            </div>
+            <div class="login-form-row">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="password" required>
+            </div>
+            <button type="submit" class="login-button">
+                <i class="ph-bold ph-identification-badge"></i>
+                <span>Login to HBnB</span>
+            </button>
         </form>
     </main>
+    <footer>
+        <p>&copy; 2025 HBnB. All rights reserved.</p>
+    </footer>
     <script src="scripts.js"></script>
 </body>
 </html>
