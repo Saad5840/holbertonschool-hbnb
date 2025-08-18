@@ -95,7 +95,7 @@ footer {
     font-weight: 600;
 }
 
-input {
+input, textarea {
     padding: 1rem;
     border: none;
     border-radius: 8px;
@@ -169,11 +169,12 @@ h2 {
     border-radius: 8px;
 }
 
-.place-book-button {
+.button {
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
+    gap: 3rem;
     text-decoration: none;
     color: #fff;
     border: none;
@@ -184,6 +185,76 @@ h2 {
     cursor: pointer;
 }
 
-.place-book-button:hover {
+.button:hover {
     background-color: #f43f5e;
+}
+
+.place-info-section {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    gap: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+.place-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2rem;
+}
+
+.place-details-row-1 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.place-details-row-2 {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+}
+
+.amenity-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.place-name-price-group {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.place-hosted, .place-amenities {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reviews {
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+}
+
+.add-review {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#review-text {
+    width: 100%;
+    margin-bottom: 1rem;
 }
