@@ -24,7 +24,7 @@
     </header>
     <main>
         <section class="login-section">
-            <form id="login-form" class="login-form">
+            <form id="login-form" class="login-form" method="POST" action="javascript:void(0);">
                 <div class="login-form-row">
                     <label for="email">Email</label>
                     <input type="email" id="email" name="email" placeholder="email@example.com" required>
@@ -37,12 +37,16 @@
                     <i class="ph-bold ph-identification-badge"></i>
                     <span>Login to HBnB</span>
                 </button>
+                <button type="button" onclick="testLogin()" style="margin-top: 10px; background-color: #f43f5e;">
+                    <i class="ph-bold ph-bug"></i>
+                    <span>Test Login (Debug)</span>
+                </button>
             </form>
-        </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2025 HBnB. All rights reserved.</p>
     </footer>
-    <script src="scripts.js"></script>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
 </body>
 </html>

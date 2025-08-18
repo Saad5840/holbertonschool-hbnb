@@ -2,6 +2,8 @@ from flask import Flask, render_template
 from flask_restx import Api
 from app.extensions import db, bcrypt, jwt
 from routes import api
+# Import all models to ensure they are registered with SQLAlchemy
+import infrastructure.models
 
 def create_app(config_class):
     app = Flask(__name__)
@@ -26,6 +28,10 @@ def create_app(config_class):
     @app.route('/reviews')
     def reviews():
         return render_template('add_review.html')
+    
+    @app.route('/test')
+    def test():
+        return render_template('test.html')
     
     # Initialize API with custom documentation path
     api.init_app(app, doc='/api/docs/')

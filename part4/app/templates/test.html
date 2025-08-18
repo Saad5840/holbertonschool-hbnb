@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page</title>
+    <script src="{{ url_for('static', filename='scripts.js') }}"></script>
+</head>
+<body>
+    <h1>Test Page</h1>
+    <p>Check the browser console for JavaScript messages.</p>
+    <button onclick="testLogin()">Test Login Function</button>
+    <button onclick="showMessage('Test message', 'success')">Test Message</button>
+</body>
+</html>
