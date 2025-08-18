@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2/src/bold/style.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2"></script>
 </head>
 <body>
     <header>
@@ -23,20 +23,22 @@
         </nav> 
     </header>
     <main>
-        <form id="login-form" class="login-form">
-            <div class="login-form-row">
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="email@example.com" required>
-            </div>
-            <div class="login-form-row">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="password" required>
-            </div>
-            <button type="submit" class="login-button">
-                <i class="ph-bold ph-identification-badge"></i>
-                <span>Login to HBnB</span>
-            </button>
-        </form>
+        <section class="login-section">
+            <form id="login-form" class="login-form">
+                <div class="login-form-row">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="email@example.com" required>
+                </div>
+                <div class="login-form-row">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="password" required>
+                </div>
+                <button type="submit" class="login-button">
+                    <i class="ph-bold ph-identification-badge"></i>
+                    <span>Login to HBnB</span>
+                </button>
+            </form>
+        </div>
     </main>
     <footer>
         <p>&copy; 2025 HBnB. All rights reserved.</p>

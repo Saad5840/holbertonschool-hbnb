@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.2"></script>
 </head>
 <body>
     <header>
@@ -15,18 +16,108 @@
             <a href="{{ url_for('index') }}">
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo" />
             </a>
-            <a href="{{ url_for('login') }}" class="login-button">Login</a>
+            <a href="{{ url_for('login') }}" class="login-button">
+                <i class="ph-bold ph-identification-badge"></i>
+                <span>Login</span>
+            </a>
         </nav> 
     </header>
     <main>
-        <section id="filter">
-            <label for="price-filter">Max Price:</label>
-            <select id="price-filter">
-                <!-- Options will be populated dynamically -->
-            </select>
-        </section>
-        <section id="places-list">
-            <!-- List of places will be populated dynamically -->
+        <section class="available-places-section">
+            <section class="filter-section">
+                <h2>Available Places</h2>
+                <section class="filter">
+                    <label for="price-filter" class="price-filter">
+                        <i class="ph ph-money" style="font-size: 16pt;"></i>
+                        Filter places by Max Price
+                    </label>
+                    <div class="filter-options">
+                        <label class="filter-option">
+                            <input type="radio" name="option" value="-1">
+                            All
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="option" value="50">
+                            $50
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="option" value="100">
+                            $100
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="option" value="150">
+                            $150
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="option" value="200">
+                            $200
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="option" value="250">
+                            $250
+                        </label>
+                    </div>
+                </section>
+            </section>
+            <section class="places-list">
+                <!-- List of places will be populated dynamically -->
+                <div class="place-card">
+                    <h3 class="place-name">Beautiful Beach House</h3>
+                    <span>Riyadh</span>
+                    <span>Features</span>
+                    <div class="place-amenities">
+                        <i class="ph ph-car" style="font-size: 16pt;"></i>
+                        <i class="ph ph-bread" style="font-size: 16pt;"></i>
+                        <i class="ph ph-wifi-high" style="font-size: 16pt;"></i>
+                    </div>
+                    <a href="" class="place-book-button">
+                        <span>View Details</span>
+                        <i class="ph-bold ph-caret-right"></i>
+                    </a>
+                </div>
+                <div class="place-card">
+                    <h3 class="place-name">Beautiful Beach House</h3>
+                    <span>Riyadh</span>
+                    <span>Features</span>
+                    <div class="place-amenities">
+                        <i class="ph ph-car" style="font-size: 16pt;"></i>
+                        <i class="ph ph-bread" style="font-size: 16pt;"></i>
+                        <i class="ph ph-wifi-high" style="font-size: 16pt;"></i>
+                    </div>
+                    <a href="" class="place-book-button">
+                        <span>View Details</span>
+                        <i class="ph-bold ph-caret-right"></i>
+                    </a>
+                </div>
+                <div class="place-card">
+                    <h3 class="place-name">Beautiful Beach House</h3>
+                    <span>Riyadh</span>
+                    <span>Features</span>
+                    <div class="place-amenities">
+                        <i class="ph ph-car" style="font-size: 16pt;"></i>
+                        <i class="ph ph-bread" style="font-size: 16pt;"></i>
+                        <i class="ph ph-wifi-high" style="font-size: 16pt;"></i>
+                    </div>
+                    <a href="" class="place-book-button">
+                        <span>View Details</span>
+                        <i class="ph-bold ph-caret-right"></i>
+                    </a>
+                </div>
+                <div class="place-card">
+                    <h3 class="place-name">Beautiful Beach House</h3>
+                    <span>Riyadh</span>
+                    <span>Features</span>
+                    <div class="place-amenities">
+                        <i class="ph ph-car" style="font-size: 16pt;"></i>
+                        <i class="ph ph-bread" style="font-size: 16pt;"></i>
+                        <i class="ph ph-wifi-high" style="font-size: 16pt;"></i>
+                    </div>
+                    <a href="" class="place-book-button">
+                        <span>View Details</span>
+                        <i class="ph-bold ph-caret-right"></i>
+                    </a>
+                </div>
+            </section>
         </section>
     </main>
     <footer>

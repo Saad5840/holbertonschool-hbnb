@@ -19,6 +19,7 @@ body {
     min-height: 100vh;
     background-color: #f5f5f5;
     color: #131313;
+    overflow: hidden;
 }
 
 
@@ -42,11 +43,7 @@ nav a {
 }
 
 main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     width: 100vw;
-    padding: 2rem;
 }
 
 footer {
@@ -55,6 +52,14 @@ footer {
     justify-content: center;
     background-color: #131313;
     color: #fff;
+    padding: 2rem;
+}
+
+.login-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
     padding: 2rem;
 }
 
@@ -87,6 +92,7 @@ footer {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    font-weight: 600;
 }
 
 input {
@@ -99,4 +105,85 @@ input {
 
 input::placeholder {
     color: #6a6a6a;
+}
+
+.available-places-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.filter-section {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+h2 {
+    font-size: 32pt;
+}
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2rem;
+    border-radius: 8px;
+    background-color: #fff;
+}
+
+.price-filter {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.filter-options {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.filter-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    border: 1px solid #131313;
+}
+
+.places-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+}
+
+.place-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.place-book-button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    text-decoration: none;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    background-color: #131313;
+    font-size: 12pt;
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.place-book-button:hover {
+    background-color: #f43f5e;
 }
