@@ -92,7 +92,7 @@ footer {
     cursor: pointer;
 }
 
-.login-button:hover {
+.login-button:hover, .add-review-button:hover {
     background-color: #f43f5e;
 }
 
