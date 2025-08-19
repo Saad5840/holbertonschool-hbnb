@@ -117,7 +117,7 @@ async function handleLogin(event) {
  * Check if user is already authenticated
  */
 function checkAuthStatus() {
-    const token = localStorage.getItem('access_token');
+    const token = getAuthToken();
     if (token) {
         updateAuthUI(true);
     } else {
@@ -130,17 +130,20 @@ function checkAuthStatus() {
  * @param {boolean} isLoggedIn - Whether user is logged in
  */
 function updateAuthUI(isLoggedIn) {
-    const loginButton = document.querySelector('.login-button');
-    
-    if (loginButton) {
-        if (isLoggedIn) {
-            loginButton.innerHTML = '<i class="ph-bold ph-sign-out"></i><span>Logout</span>';
-            loginButton.onclick = () => handleLogout();
-            loginButton.href = 'javascript:void(0);';
-        } else {
-            loginButton.innerHTML = '<i class="ph-bold ph-identification-badge"></i><span>Login</span>';
-            loginButton.onclick = null;
-            loginButton.href = '/login';
+    const loginLink = document.getElementById('login-link');
+    const logoutLink = document.getElementById('logout-link');
+
+    if (isLoggedIn) {
+        if (loginLink) loginLink.style.display = 'none';
+        if (logoutLink) {
+            logoutLink.style.display = 'inline-flex';
+            logoutLink.onclick = () => handleLogout();
+        }
+    } else {
+        if (loginLink) loginLink.style.display = 'inline-flex';
+        if (logoutLink) {
+            logoutLink.style.display = 'none';
+            logoutLink.onclick = null;
         }
     }
 }
@@ -150,7 +153,7 @@ function updateAuthUI(isLoggedIn) {
  */
 function handleLogout() {
     // Remove stored tokens
-    localStorage.removeItem('access_token');
+    localStorage.removeItem('authToken');
     localStorage.removeItem('user_info');
     
     // Update UI
@@ -535,7 +538,7 @@ function setupReviewForm() {
 async function handleReviewSubmit(event) {
     event.preventDefault();
     
-    const token = localStorage.getItem('access_token');
+    const token = getAuthToken();
     if (!token) {
         showMessage('Please login to add a review', 'error');
         return;

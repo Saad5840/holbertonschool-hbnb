@@ -15,7 +15,11 @@
             <a href="{{ url_for('index') }}">
                 <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo" />
             </a>
-            <a href="{{ url_for('login') }}" class="login-button">Login</a>
+            <a id="login-link" href="{{ url_for('login') }}" class="login-button">Login</a>
+            <a id="logout-link" href="javascript:void(0);" class="login-button" style="display: none;">
+                <i class="ph-bold ph-sign-out"></i>
+                <span>Logout</span>
+            </a>
         </nav> 
     </header>
     <main>
