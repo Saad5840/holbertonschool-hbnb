@@ -40,7 +40,6 @@ document.addEventListener('DOMContentLoaded', () => {
  */
 async function handleLogin(event) {
     console.log('Login form submitted!');
-    alert('Form submitted!'); // Temporary debug alert
     event.preventDefault();
     
     const form = event.target;
@@ -283,23 +282,7 @@ async function authenticatedFetch(url, options = {}) {
     });
 }
 
-// Test function for debugging
-function testLogin() {
-    console.log('Test login function called!');
-    const email = document.getElementById('email').value || 'john@example.com';
-    const password = document.getElementById('password').value || 'password123';
-    
-    console.log('Testing with:', email, password);
-    
-    // Simulate form submission
-    const form = document.getElementById('login-form');
-    if (form) {
-        const event = new Event('submit', { bubbles: true, cancelable: true });
-        form.dispatchEvent(event);
-    } else {
-        console.error('Form not found!');
-    }
-}
+//
 
 /**
  * Load and display places data
